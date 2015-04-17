@@ -1,0 +1,4 @@
+String name="Udacity";
+name.length();
+name.substring(3,7);System.out.println("hola");name.indexOf("c");
+System.out.println("This is a line, " + name );
