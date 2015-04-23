@@ -10,9 +10,9 @@ public class ElevatorDemo
         System.out.print("Floor: ");
         int floor = in.nextInt();
         int actualFloor;
-        if (floor > 13)
+		if (floor > 14)
         {
-            actualFloor = floor - 1;
+			actualFloor = floor - 2;
         }
         else
         {
