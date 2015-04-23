@@ -4,9 +4,10 @@ This file is used to test new code on the fly
 @author: Jesus Arturo Escobedo Cabello
 '''
 
-p = [0.0, 0.0, 1.0, 0.0, 0.0]
+p = [0.2, 0.2, 0.2, 0.2, 0.2]
 world = ['green', 'red', 'red', 'green', 'green']
 measurements = ['red', 'green']
+motions = [1, 1]
 pHit = 0.6
 pMiss = 0.2
 pExact = 0.8
@@ -64,8 +65,12 @@ def inaccurate_move(p, U):
 
 
 if __name__ == '__main__':
+    print 'world= ', world
     print 'prior= ', p
-    for i in range(1000):
-        p = inaccurate_move(p, 1)
+    print 'measurements= ', measurements
+    print 'motions= ', motions
+    for i in range(len(measurements)):
+        p = sense(p, measurements[i])
+        p = inaccurate_move(p, motions[i])
 
     print 'posterior=', p
