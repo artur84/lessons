@@ -65,4 +65,7 @@ def inaccurate_move(p, U):
 
 if __name__ == '__main__':
     print 'prior= ', p
-    print 'posterior=', inaccurate_move(p, 1)
+    for i in range(1000):
+        p = inaccurate_move(p, 1)
+
+    print 'posterior=', p
