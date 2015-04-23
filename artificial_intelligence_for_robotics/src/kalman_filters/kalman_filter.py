@@ -15,6 +15,14 @@ def predict(mean1, var1, mean2, var2):
     return [new_mean, new_var]
 
 if __name__ == '__main__':
-    print update(10., 8. , 13. , 2.)
-    print 'prediction'
-    print predict(10., 4. , 12. , 4.)
+    measurements = [5., 6., 7., 9., 10.]
+    motion = [1.0, 1., 2., 1., 1.]
+    measurement_sig = 4.
+    motion_sig = 2.
+    mu = 0.
+    sig = 10000.
+    for k in range(len(measurements)):
+        [mu, sig] = update(mu, sig, measurements[k], measurement_sig)
+        print 'update: ', [mu, sig]
+        [mu, sig] = predict(mu, sig, motion[k], motion_sig)
+        print 'predict: ', [mu, sig]
