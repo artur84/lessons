@@ -9,7 +9,9 @@ public class Flag
     public Color getColorAt(int x, int y)
     {
         Color c;
-        if (y >= height / 2)
+		if (x < width / 3) {
+			c = Color.BLUE;
+		} else if (x < 2 * width / 3)
         {
             c = Color.WHITE;
         }
