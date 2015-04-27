@@ -17,9 +17,8 @@ public class ListOfPictures
         gallery.add(new Picture("monet2.jpg"));
         gallery.add(new Picture("renoir1.jpg"));
 		int x = 0, picSeparation = 10;
-        for (int i = 0; i < gallery.size(); i++)
+		for (Picture pic : gallery)
         {
-            Picture pic = gallery.get(i);
 			pic.translate(x, 0);
 			x = x + pic.getWidth() + picSeparation;
             pic.draw();
