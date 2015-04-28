@@ -119,8 +119,41 @@ def eval(r, p):
 
 ####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
 if __name__ == '__main__':
-    N=1000
-    p=[]
+    myrobot = robot()
+    myrobot = myrobot.move(0.1, 5.0)
+    Z = myrobot.sense()
+
+    N = 1000
+    p = []
     for i in range(N):
-        p.append(robot())
-    print len(p)
+        x = robot()
+        x.set_noise(0.05, 0.05, 5.0)
+        p.append(x)
+
+    p2 = []
+    for i in range(N):
+        p2.append(p[i].move(0.1, 5.0))
+    p = p2
+
+    w = []
+    for i in range(N):
+        w.append(p[i].measurement_prob(Z))
+
+
+    #We need to init index randomly
+    index = random.randint(1, N)
+    #print "index= ", index
+    #print "len(p)= ", len(p)
+    #print p[index]
+    beta = 0
+
+    wmax = max(w)
+    q = []
+    for i in range(N):
+        beta += random.random() * 2.0 * wmax
+        while beta > w[index]:
+            beta -= w[index]
+            index = (index + 1) % N    #The %N is to recycle from N to 1
+        q.append(p[index])
+    p = q
+    print p
