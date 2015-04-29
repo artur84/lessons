@@ -105,55 +105,63 @@ class robot:
         return '[x=%.6s y=%.6s orient=%.6s]' % (str(self.x), str(self.y), str(self.orientation))
 
 
-
+""" Evaluates the mean error of the particle set p
+    @param r: the robot position
+    @param p: the particle set
+"""
 def eval(r, p):
-    sum = 0.0;
+    suma = 0.0;
     for i in range(len(p)):    # calculate mean error
         dx = (p[i].x - r.x + (world_size / 2.0)) % world_size - (world_size / 2.0)
         dy = (p[i].y - r.y + (world_size / 2.0)) % world_size - (world_size / 2.0)
         err = sqrt(dx * dx + dy * dy)
-        sum += err
-    return sum / float(len(p))
+        suma += err
+    return suma / float(len(p))
 
 
 
 ####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
 if __name__ == '__main__':
     myrobot = robot()
-    myrobot = myrobot.move(0.1, 5.0)
-    Z = myrobot.sense()
 
-    N = 1000
+    T = 10    #Number of times to run the filter
+    N = 4000
     p = []
     for i in range(N):
         x = robot()
         x.set_noise(0.05, 0.05, 5.0)
         p.append(x)
 
-    p2 = []
-    for i in range(N):
-        p2.append(p[i].move(0.1, 5.0))
-    p = p2
 
-    w = []
-    for i in range(N):
-        w.append(p[i].measurement_prob(Z))
+    for n in range(T):
+        #The real robot moves
+        myrobot = myrobot.move(0.1, 5.0)
+        Z = myrobot.sense()
 
+        #The simulated movement of the particles
+        p2 = []
+        for i in range(N):
+            p2.append(p[i].move(0.1, 5.0))
+        p = p2
 
-    #We need to init index randomly
-    index = random.randint(1, N)
-    #print "index= ", index
-    #print "len(p)= ", len(p)
-    #print p[index]
-    beta = 0
+        #Measure the particles weight
+        w = []
+        for i in range(N):
+            w.append(p[i].measurement_prob(Z))
 
-    wmax = max(w)
-    q = []
-    for i in range(N):
-        beta += random.random() * 2.0 * wmax
-        while beta > w[index]:
-            beta -= w[index]
-            index = (index + 1) % N    #The %N is to recycle from N to 1
-        q.append(p[index])
-    p = q
-    print p
+        #The RESAMPLING step
+        index = random.randint(1, N)    #We need to init index randomly
+        beta = 0
+        wmax = max(w)
+
+        p3 = []
+        for i in range(N):
+            beta += random.random() * 2.0 * wmax
+            while beta > w[index]:
+                beta -= w[index]
+                index = (index + 1) % N    #The %N is to recycle from N to 1
+            p3.append(p[index])
+        p = p3
+
+        # Eval the error
+        print eval(myrobot, p)
