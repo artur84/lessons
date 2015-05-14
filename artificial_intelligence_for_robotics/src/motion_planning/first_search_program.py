@@ -44,8 +44,7 @@ def search(grid, init, goal, cost):
     g = 0
     step = 0    # The step at which each node is expanded
     open = [[g, x, y]]
-    expand[x][y] = step
-    step += 1
+
     found = False    # flag that is set when search is complete
     resign = False    # flag set if we can't find expand
 
@@ -59,7 +58,8 @@ def search(grid, init, goal, cost):
             x = next[1]
             y = next[2]
             g = next[0]
-
+            expand[x][y] = step
+            step += 1
             if x == goal[0] and y == goal[1]:
                 found = True
             else:
@@ -70,8 +70,7 @@ def search(grid, init, goal, cost):
                         if closed[x2][y2] == 0 and grid[x2][y2] == 0:
                             g2 = g + cost
                             open.append([g2, x2, y2])
-                            expand[x2][y2] = step
-                            step += 1
+
                             closed[x2][y2] = 1
     return expand
 
