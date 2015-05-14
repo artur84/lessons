@@ -58,7 +58,6 @@ def search(grid, init, goal, cost):
         #Check if cell is the goal
         if cell == goal:
             path = [gcost, cell[0], cell[1]]
-            print path
             return path    #If we find the goal we finish the programm
         else:
             #Add it to the closed list
@@ -90,19 +89,9 @@ def search(grid, init, goal, cost):
                 gcost = min(gcosts)
                 cell = open_list[gcosts.index(gcost)]
             else:
-                print 'fail'
-                return 0
-
-
-
-
-
-
-
-            
-
+                return 'fail'
 
 
 if __name__ == '__main__':
-    path = search(grid, init, goal, cost)
+    print search(grid, init, goal, cost)
     pass
