@@ -45,8 +45,6 @@ def search(grid, init, goal, cost):
     # ----------------------------------------
     # insert code here
     # ----------------------------------------
-    print 'Start search'
-    print 'goal: ', goal
     gcost = 0    #Initial gvalue is zero.
     path = [gcost, init[0], init[1]]    #[gcost, row, column]
     open_list = []    #Items that have to be checked
@@ -57,17 +55,10 @@ def search(grid, init, goal, cost):
     gcosts.append(gcost)    #initial cell will have zero cost.
     cell = open_list[0]
     while True :
-        print '----------'
-        print 'current cell'
-        print cell
-        print 'open list'
-        print open_list
-        print 'gcost'
-        print gcosts
         #Check if cell is the goal
         if cell == goal:
-            print 'if'
             path = [gcost, cell[0], cell[1]]
+            print path
             return path    #If we find the goal we finish the programm
         else:
             #Add it to the closed list
@@ -114,8 +105,4 @@ def search(grid, init, goal, cost):
 
 if __name__ == '__main__':
     path = search(grid, init, goal, cost)
-    print 'Resulting Path:'
-    print path
-    print 'Expected Path:'
-    print [11, 4, 5]
     pass
