@@ -42,7 +42,10 @@ delta_name = ['^', '<', 'v', '>']
 def draw_grid(grid):
     print '---------------'
     for row in grid:
-        print row
+        print '|',
+        for element in row:
+            print element, '\t|',
+        print
     print '---------------'
 
 def search(grid, init, goal, cost):
@@ -53,8 +56,8 @@ def search(grid, init, goal, cost):
     closed_grid[init[0]][init[1]] = 1
     gcosts = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
-    path_drawing = [['' for row in range(len(grid[0]))] for col in range(len(grid))]
-    actions_grid = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]    #-1 is no defined action, 1,2,3,4 will be as defined in delta up,left,down,right
+    policy = [['' for row in range(len(grid[0]))] for col in range(len(grid))]
+    action = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]    #-1 is no defined action, 1,2,3,4 will be as defined in delta up,left,down,right
     x = init[0]
     y = init[1]
     g = 0
@@ -88,12 +91,25 @@ def search(grid, init, goal, cost):
                             g2 = g + cost
                             open_list.append([g2, x2, y2])
                             gcosts[x2][y2] = g
-
                             closed_grid[x2][y2] = 1
-    draw_grid(expand)
-    draw_grid(closed_grid)
-    draw_grid(gcosts)
-    draw_grid(path_drawing)
+                            action[x2][y2] = i    #The "i" action was taken to arrive to (x2,y2)
+
+
+
+    if found:
+        #Drawing the path with >,<,^, v symbols
+        x = goal[0]
+        y = goal[1]
+        policy[x][y] = '*'
+        while x != init[0] or y != init[1]:
+            x2 = x - delta[action[x][y]][0]
+            y2 = y - delta[action[x][y]][1]
+            policy[x2][y2] = delta_name[action[x][y]]
+            x = x2
+            y = y2
+
+        draw_grid(policy)
+        return policy
 
 if __name__ == '__main__':
     print search(grid, init, goal, cost)
