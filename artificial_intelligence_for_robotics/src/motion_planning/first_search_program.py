@@ -60,7 +60,7 @@ def search(grid, init, goal, cost):
     gcosts = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     fcosts = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
-    policy = [['' for row in range(len(grid[0]))] for col in range(len(grid))]
+    policy = [[' ' for row in range(len(grid[0]))] for col in range(len(grid))]
     action = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]    #-1 is no defined action, 1,2,3,4 will be as defined in delta up,left,down,right
     x = init[0]
     y = init[1]

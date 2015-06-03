@@ -4,12 +4,11 @@ Created on 02/06/2015
 @author: Arturo Escobedo
 '''
 
-grid = [[0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0],
+grid = [[0, 1, 0, 0, 0, 0],
+        [0, 1, 1, 0, 1, 0],
         [0, 0, 0, 0, 1, 0],
-        [0, 0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 1, 0]]
+        [0, 1, 1, 1, 1, 0],
+        [0, 1, 0, 1, 1, 0]]
 goal = [len(grid) - 1, len(grid[0]) - 1]
 cost = 1    # the cost associated with moving from a cell to an adjacent one
 delta = [[-1, 0 ],    # go up
@@ -39,7 +38,7 @@ def compute_value(grid, goal, cost):
     """
     values = [[99 for row in range(len(grid[0]))] for col in range(len(grid))]
     closed_grid = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
-    policy = [['' for row in range(len(grid[0]))] for col in range(len(grid))]    #the grid with arrows >,<,v .... to draw the paths
+    policy = [[' ' for row in range(len(grid[0]))] for col in range(len(grid))]    #the grid with arrows >,<,v .... to draw the paths
 
     val = 0
     x = goal[0]
@@ -77,7 +76,7 @@ def compute_value(grid, goal, cost):
 
     draw_grid(values)
     draw_grid(policy)
-    return values
+    return policy
 
 if __name__ == '__main__':
     print compute_value(grid, goal, cost)
