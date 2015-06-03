@@ -47,6 +47,8 @@ def compute_value(grid, goal, cost):
 
     values = [[99 for row in range(len(grid[0]))] for col in range(len(grid))]
     closed_grid = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
+    policy = [['' for row in range(len(grid[0]))] for col in range(len(grid))]
+    action = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]    #-1 is no defined action, 1,2,3,4 will be as defined in delta up,left,down,right
 
     val = 0
     x = goal[0]
@@ -56,6 +58,7 @@ def compute_value(grid, goal, cost):
     closed_grid[x][y] = 1
 
     values[x][y] = val
+    policy[x][y] = '*'
     found = False    # flag that is set when search is complete
 
     while not found:
@@ -69,20 +72,20 @@ def compute_value(grid, goal, cost):
             x = next_node[1]
             val = next_node[0] + cost
 
-            for action in delta:
-                x2 = x + action[0]
-                y2 = y + action[1]
+            for i in range(len(delta)):
+                x2 = x + delta[i][0]
+                y2 = y + delta[i][1]
                 if x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0]) and closed_grid[x2][y2] == 0:
                     if  grid[x2][y2] == 0:
                         values[x2][y2] = val
+                        policy[x2][y2] = delta_name[(i + 2) % 4]    #Gets the inverse action
                         open_list.append([val, x2, y2])
                         closed_grid[x2][y2] = 1
                     else:
                         values[x2][y2] = 99
 
-
-
     draw_grid(values)
+    draw_grid(policy)
     return values
 
 
