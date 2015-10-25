@@ -9,19 +9,19 @@
 #include <iostream>
 using namespace std;
 
-double suma_array(double my_array[], int size) {
-	double result=0;
+template <class T> //T is generic type
+
+T sum(const T data[], int size, T s=0) {
 	for(int i=0; i<size;i++){
-		result += my_array[i];
+		s += data[i];
 	}
-	return result;
+	return s;
 }
 
 int main() {
-	double result;
-	double my_array[8] = {1.0,2.0,3.0};
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	result = suma_array(my_array,8);
-	cout << result;
-	return 0;
+	cout << "template for sum()" << endl;
+	int a[]={1,2,3};
+	double b[]={2.1, 2.2, 2.3};
+	cout << sum(a,3) << endl;
+	cout << sum(b,3) << endl;
 }
