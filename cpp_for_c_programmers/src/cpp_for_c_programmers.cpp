@@ -11,6 +11,7 @@
 #include <ctime>
 #include <random>
 #include "Point.h"
+#include "List.h"
 using namespace std;
 
 template<class T> //T is generic type
@@ -109,4 +110,23 @@ int main() {
 
 	bool** graph = draw_random_graph(size, density);
 	print_graph(graph, size);
+
+	/***
+	 * Lists
+	 */
+	cout << endl;
+	cout << "****Lists********" << endl;
+	int arrayA[7] = { 0, 1, 2, 3, 4, 5 };
+	List la(arrayA, 7);
+	List lb;
+	la.prepend(9);
+	la.prepend(8);
+	cout << "list la" << endl;
+	la.print();
+	for (int i = 0; i < 40; i++) {
+		lb.prepend(i);
+	}
+	cout << "list lb" << endl;
+	lb.print();
+
 }
