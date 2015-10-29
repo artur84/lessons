@@ -117,18 +117,23 @@ int main() {
 	cout << endl;
 	cout << "****Lists********" << endl;
 	int arrayA[7] = { 0, 1, 2, 3, 4, 5 };
-	List la(arrayA, 7);
+	List* la = new List(arrayA, 7); //New gives back a pointer, so 'la' is a pointer
 	List lb;
-	List lc(la);
-	la.prepend(9);
-	la.prepend(8);
+	lb.prepend(9);
+	la->prepend(8); //as 'la' is a pointer we acces the prepend function using ->
+
 	cout << "list la" << endl;
-	la.print();
-	for (int i = 0; i < 40; i++) {
+	la->print();
+	cout << "****delete List la****" << endl;
+	delete la;
+
+	for (int i = 0; i < 10; i++) {
 		lb.prepend(i);
 	}
 	cout << "list lb" << endl;
 	lb.print();
+
+	List lc(lb);
 	cout << "list lc" << endl;
 	lc.print();
 
