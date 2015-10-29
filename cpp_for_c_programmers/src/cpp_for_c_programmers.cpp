@@ -7,6 +7,9 @@
 //============================================================================
 
 #include <iostream>
+#include <cstdlib> //For srand function
+#include <ctime>
+#include <random>
 #include "Point.h"
 using namespace std;
 
@@ -44,12 +47,47 @@ std::ostream & operator<<(std::ostream& out, Point& point) {
 	return out;
 }
 
+bool** draw_random_graph(int size, double density) {
+	/*** Creates a random graph
+	 * 	size is the size of the graf
+	 * 	density a value between (0 and 1)
+	 * 	is the probability to generate a link between to given nodes of the graph
+	 */
+	bool** graph;
+	srand(time(0));
+	graph = new bool*[size];
+	for (int i = 0; i < size; i++) {
+		graph[i] = new bool[size];
+	}
+	//Init with the given density
+	for (int i = 0; i < size; ++i)
+		for (int j = i; j < size; ++j)
+			if (i == j)
+				graph[i][j] = 0; //no loops
+			else
+				graph[i][j] = graph[j][i] = ((static_cast<float>(rand())
+						/ RAND_MAX) < density); //prob() < density?
+
+	return graph;
+}
+
+void print_graph(bool** graph, int size) {
+	//Init with a given density
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			cout << graph[i][j];
+		}
+		cout << endl;
+	}
+}
+
 int main() {
 	cout << "template for sum()" << endl;
 	int a[] = { 1, 2, 3 };
 	double b[] = { 2.1, 2.2, 2.3 };
 	cout << sum(a, 3) << endl;
 	cout << sum(b, 3) << endl;
+	srand(time(0));
 
 	cout << "template for substract()" << endl;
 	cout << substract(a, 3) << endl;
@@ -61,4 +99,14 @@ int main() {
 
 	cout << "a= " << pointa << " b= " << pointb << endl;
 
+	/***
+	 * Graphs
+	 */
+	cout << "**graphs " << endl;
+
+	int size = 7;
+	double density = 0.99;
+
+	bool** graph = draw_random_graph(size, density);
+	print_graph(graph, size);
 }
