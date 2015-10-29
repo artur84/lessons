@@ -119,6 +119,7 @@ int main() {
 	int arrayA[7] = { 0, 1, 2, 3, 4, 5 };
 	List la(arrayA, 7);
 	List lb;
+	List lc(la);
 	la.prepend(9);
 	la.prepend(8);
 	cout << "list la" << endl;
@@ -128,5 +129,7 @@ int main() {
 	}
 	cout << "list lb" << endl;
 	lb.print();
+	cout << "list lc" << endl;
+	lc.print();
 
 }

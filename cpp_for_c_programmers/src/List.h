@@ -12,6 +12,7 @@ class List {
 public:
 	List();
 	List(const int* arr, int n);
+	List(const List& lst);
 	virtual ~List();
 	void prepend(int n); //insert at front value n
 	int get_element(); //Returns the element currently pointed by cursor

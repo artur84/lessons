@@ -7,7 +7,10 @@
 
 #include "ListElement.h"
 
-ListElement::ListElement(int n = 0, ListElement* ptr = 0) :
+ListElement::ListElement() :
+		d(0), next(0) {
+}
+ListElement::ListElement(int n, ListElement* ptr) :
 		d(n), next(ptr) {
 }
 

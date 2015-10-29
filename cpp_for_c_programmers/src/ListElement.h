@@ -10,6 +10,7 @@
 
 class ListElement {
 public:
+	ListElement();
 	ListElement(int n, ListElement* ptr);
 	virtual ~ListElement();
 	int d; //The data in the element
