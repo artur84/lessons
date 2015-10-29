@@ -6,15 +6,14 @@
  */
 
 #include "ListElement.h"
+#include <iostream>
+using namespace std;
 
-ListElement::ListElement() :
-		d(0), next(0) {
-}
-ListElement::ListElement(int n, ListElement* ptr) :
+ListElement::ListElement(int n = 0, ListElement* ptr = 0) :
 		d(n), next(ptr) {
 }
 
 ListElement::~ListElement() {
-	// TODO Auto-generated destructor stub
+	cout << "ListElement Destructor was called" << endl;
 }
 

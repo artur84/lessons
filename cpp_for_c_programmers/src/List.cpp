@@ -33,13 +33,32 @@ List::List(const List& lst) {
 		head = 0;
 		cursor = 0;
 	} else {
-		head = lst.head;
-		cursor = lst.cursor;
+		cursor = lst.head;
+		ListElement* h = new ListElement(0, 0);
+		ListElement* prev;
+		head = h;
+		h->d = lst.head->d; //Copy old head content to new head content.
+		prev = h;
+
+		for (cursor = lst.head->next; cursor != 0;) {
+			h = new ListElement(0, 0);
+			h->d = cursor->d;
+			prev->next = h;
+			cursor = cursor->next;
+			prev = h;
+		}
+		cursor = head;
+
 	}
 
 }
 List::~List() {
-// TODO Auto-generated destructor stub
+	cout << "List Destructor Called" << endl;
+	for (cursor = head; cursor != 0;) {
+		cursor = head->next;
+		delete head;
+		head = cursor;
+	}
 }
 
 void List::prepend(int n) {
