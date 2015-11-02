@@ -57,8 +57,6 @@ def search(grid, init, goal, cost):
     # ----------------------------------------
     closed_grid = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     closed_grid[init[0]][init[1]] = 1
-    gcosts = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
-    fcosts = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
     expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
     policy = [[' ' for row in range(len(grid[0]))] for col in range(len(grid))]
     action = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]    #-1 is no defined action, 1,2,3,4 will be as defined in delta up,left,down,right
@@ -68,7 +66,6 @@ def search(grid, init, goal, cost):
     f = g + heuristic[x][y]
     step = 0    # The step at which each node is expanded
     open_list = [[f, g, x, y]]
-    gcosts[x][y] = g
 
     found = False    # flag that is set when search is complete
     resign = False    # flag set if we can't find expand
@@ -96,7 +93,6 @@ def search(grid, init, goal, cost):
                             g2 = g + cost
                             f2 = g2 + heuristic[x2][y2]
                             open_list.append([f2, g2, x2, y2])
-                            gcosts[x2][y2] = g
                             closed_grid[x2][y2] = 1
                             action[x2][y2] = i    #The "i" action was taken to arrive to (x2,y2)
 
@@ -115,6 +111,7 @@ def search(grid, init, goal, cost):
             y = y2
 
         draw_grid(expand)
+        draw_grid(action)
         draw_grid(policy)
         return policy
     else:
