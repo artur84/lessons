@@ -16,6 +16,7 @@ private:
 public:
 	Point();
 	Point(double xcoord, double ycoord);
+	Point(double x);
 
 	virtual ~Point();
 	//Access  x coordinate

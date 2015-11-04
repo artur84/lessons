@@ -7,9 +7,16 @@
 
 #include "Point.h"
 
-Point::Point() {
-	x = 0;
-	y = 0;
+Point::Point() :
+		x(0.0), y(0.0) {
+}
+
+Point::Point(double x) :
+		x(x) {
+	/*** This constructor allows conversions from double to point
+	 *  Example: Point s; double d=3.5; s=d; //it works ok!!
+	 */
+	y = 0.0;
 }
 
 Point::Point(double xcoord, double ycoord) :

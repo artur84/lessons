@@ -97,44 +97,47 @@ int main() {
 	 * Using Point Class
 	 */
 	Point pointa(0, 2), pointb(3.4, 5.6);
+	Point s;
+	double d = 3.5;
+	s = d;
 
-	cout << "a= " << pointa << " b= " << pointb << endl;
+	cout << "s= " << s << " b= " << pointb << endl;
 
-	/***
-	 * Graphs
-	 */
-	cout << "**graphs " << endl;
-
-	int size = 7;
-	double density = 0.99;
-
-	bool** graph = draw_random_graph(size, density);
-	print_graph(graph, size);
-
-	/***
-	 * Lists
-	 */
-	cout << endl;
-	cout << "****Lists********" << endl;
-	int arrayA[7] = { 0, 1, 2, 3, 4, 5 };
-	List* la = new List(arrayA, 7); //New gives back a pointer, so 'la' is a pointer
-	List lb;
-	lb.prepend(9);
-	la->prepend(8); //as 'la' is a pointer we acces the prepend function using ->
-
-	cout << "list la" << endl;
-	la->print();
-	cout << "****delete List la****" << endl;
-	delete la;
-
-	for (int i = 0; i < 10; i++) {
-		lb.prepend(i);
-	}
-	cout << "list lb" << endl;
-	lb.print();
-
-	List lc(lb);
-	cout << "list lc" << endl;
-	lc.print();
+//	/***
+//	 * Graphs
+//	 */
+//	cout << "**graphs " << endl;
+//
+//	int size = 7;
+//	double density = 0.99;
+//
+//	bool** graph = draw_random_graph(size, density);
+//	print_graph(graph, size);
+//
+//	/***
+//	 * Lists
+//	 */
+//	cout << endl;
+//	cout << "****Lists********" << endl;
+//	int arrayA[7] = { 0, 1, 2, 3, 4, 5 };
+//	List* la = new List(arrayA, 7); //New gives back a pointer, so 'la' is a pointer
+//	List lb;
+//	lb.prepend(9);
+//	la->prepend(8); //as 'la' is a pointer we acces the prepend function using ->
+//
+//	cout << "list la" << endl;
+//	la->print();
+//	cout << "****delete List la****" << endl;
+//	delete la;
+//
+//	for (int i = 0; i < 10; i++) {
+//		lb.prepend(i);
+//	}
+//	cout << "list lb" << endl;
+//	lb.print();
+//
+//	List lc(lb);
+//	cout << "list lc" << endl;
+//	lc.print();
 
 }
